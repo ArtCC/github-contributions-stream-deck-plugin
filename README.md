@@ -45,14 +45,11 @@ To use the extended year view:
 
 Here are some screenshots demonstrating the plugin in action:
 
-### 1. GitHub Contributions - Day View
-![Day View](URL_TO_DAY_VIEW_IMAGE)
+![Settings](https://github.com/ArtCC/github-contributions-stream-deck-plugin/blob/main/resources/settings.jpg)
 
-### 2. GitHub Contributions - 5-Button Year View
-![5-Button Year View](URL_TO_YEAR_VIEW_IMAGE)
+![Dark theme](https://github.com/ArtCC/github-contributions-stream-deck-plugin/blob/main/resources/dark.jpg)
 
-### 3. GitHub Contributions - Dark Theme
-![Dark Theme](URL_TO_DARK_THEME_IMAGE)
+![Light theme](https://github.com/ArtCC/github-contributions-stream-deck-plugin/blob/main/resources/light.jpg)
 
 ## Privacy and Security
 
