@@ -18,6 +18,8 @@ This Stream Deck plugin allows you to visualize your GitHub contribution graph d
 1. Download the latest release from the [releases page](https://marketplace.elgato.com/stream-deck).
 2. Double-click the downloaded file to install it on your Stream Deck.
 
+You can install the plugin locally by downloading the code but if you want to help me in developing more software independently you can purchase the plugin officially from the Elgato Stream Deck market. Thank you very much!
+
 ## Configuration
 
 1. Drag the GitHub Contributions action onto your Stream Deck.
@@ -38,8 +40,6 @@ To use the extended year view:
 1. Set up 5 adjacent buttons on your Stream Deck.
 2. Configure each button with the same settings, but assign each a unique button number (1-5).
 3. This will create a large, detailed view of your entire year's contributions spread across 5 buttons.
-
-You can install the plugin locally by downloading the code but if you want to help me in developing more software independently you can purchase the plugin officially from the Elgato Stream Deck market.
 
 ## Privacy and Security
 

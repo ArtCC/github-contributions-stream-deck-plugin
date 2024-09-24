@@ -175,7 +175,13 @@ function fetchGitHubContributions(settings, context) {
             let filteredContributions = filterContributionsByTime(contributionCalendar.weeks, time);
 
             debugLog("Contributions fetched successfully", { filteredContributions });
-            updateTitle(filteredContributions.toString(), context);
+
+            if (time === 'year5' && Array.isArray(contributionCalendar.weeks)) {
+                const buttonNumber = settings.buttonNumber ? parseInt(settings.buttonNumber) : 0;
+                updateTitleForFiveButtons(contributionCalendar.weeks, buttonNumber, context);
+            } else {
+                updateTitle(filteredContributions.toString(), context);
+            }
 
             const buttonNumber = settings.buttonNumber ? parseInt(settings.buttonNumber) : 0;
             const svg = generateContributionSVG(contributionCalendar.weeks, time, settings.theme, buttonNumber);
@@ -244,6 +250,50 @@ function updateTitle(title, context) {
     } else {
         debugLog("Error: WebSocket not connected");
     }
+}
+
+function updateTitleForFiveButtons(weeks, buttonNumber, context) {
+    const monthNames = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+    const weeksPerButton = Math.ceil(52 / 5);
+    const startWeek = buttonNumber * weeksPerButton;
+    const endWeek = Math.min(startWeek + weeksPerButton, 52);
+
+    let startMonth, endMonth;
+
+    const getMonthSafely = (weekIndex) => {
+        if (weeks[weekIndex] && weeks[weekIndex].contributionDays && weeks[weekIndex].contributionDays.length > 0) {
+            return new Date(weeks[weekIndex].contributionDays[0].date).getMonth();
+        }
+        return null;
+    };
+
+    startMonth = getMonthSafely(startWeek);
+    if (startMonth === null) {
+        for (let i = startWeek; i < endWeek; i++) {
+            startMonth = getMonthSafely(i);
+            if (startMonth !== null) break;
+        }
+    }
+
+    endMonth = getMonthSafely(endWeek - 1);
+    if (endMonth === null) {
+        for (let i = endWeek - 1; i >= startWeek; i--) {
+            endMonth = getMonthSafely(i);
+            if (endMonth !== null) break;
+        }
+    }
+
+    if (startMonth === null) startMonth = Math.floor(startWeek / 4);
+    if (endMonth === null) endMonth = Math.min(Math.floor((endWeek - 1) / 4), 11);
+
+    let title;
+    if (startMonth === endMonth) {
+        title = monthNames[startMonth];
+    } else {
+        title = `${monthNames[startMonth]}-${monthNames[endMonth]}`;
+    }
+
+    updateTitle(title, context);
 }
 
 function updateImage(newImage, context) {
