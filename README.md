@@ -41,6 +41,19 @@ To use the extended year view:
 2. Configure each button with the same settings, but assign each a unique button number (1-5).
 3. This will create a large, detailed view of your entire year's contributions spread across 5 buttons.
 
+## Screenshots
+
+Here are some screenshots demonstrating the plugin in action:
+
+### 1. GitHub Contributions - Day View
+![Day View](URL_TO_DAY_VIEW_IMAGE)
+
+### 2. GitHub Contributions - 5-Button Year View
+![5-Button Year View](URL_TO_YEAR_VIEW_IMAGE)
+
+### 3. GitHub Contributions - Dark Theme
+![Dark Theme](URL_TO_DARK_THEME_IMAGE)
+
 ## Privacy and Security
 
 This plugin uses your personal access token to retrieve your public contribution data from GitHub. Your token is stored locally on your machine and is never sent to any server other than GitHub's API.
