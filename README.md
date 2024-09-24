@@ -45,11 +45,11 @@ To use the extended year view:
 
 Here are some screenshots demonstrating the plugin in action:
 
-![Settings](https://github.com/ArtCC/github-contributions-stream-deck-plugin/blob/main/resources/settings.jpg)
+![Settings](https://github.com/ArtCC/github-contributions-stream-deck-plugin/blob/main/resources/settings.jpeg)
 
-![Dark theme](https://github.com/ArtCC/github-contributions-stream-deck-plugin/blob/main/resources/dark.jpg)
+![Dark theme](https://github.com/ArtCC/github-contributions-stream-deck-plugin/blob/main/resources/dark.jpeg)
 
-![Light theme](https://github.com/ArtCC/github-contributions-stream-deck-plugin/blob/main/resources/light.jpg)
+![Light theme](https://github.com/ArtCC/github-contributions-stream-deck-plugin/blob/main/resources/light.jpeg)
 
 ## Privacy and Security
 
