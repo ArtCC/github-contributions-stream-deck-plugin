@@ -27,7 +27,10 @@ function connectElgatoStreamDeckSocket(inPort, inPluginUUID, inRegisterEvent, in
             document.getElementById('username').value = settings['username'] || "";
             document.getElementById('token').value = settings['token'] || "";
             document.getElementById('time').value = settings['time'] || "year";
+            document.getElementById('buttonNumber').value = settings['buttonNumber'] || "0";
             document.getElementById('theme').value = settings['theme'] || "light";
+
+            toggleButtonNumberVisibility();
         } else if (event === "didReceiveGlobalSettings") {
             showMessage("Settings saved successfully!", "success");
         }
@@ -56,6 +59,7 @@ function saveSettings() {
         var username = document.getElementById('username').value;
         var token = document.getElementById('token').value;
         var time = document.getElementById('time').value;
+        var buttonNumber = document.getElementById('buttonNumber').value;
         var theme = document.getElementById('theme').value;
 
         if (!username || !token) {
@@ -71,6 +75,7 @@ function saveSettings() {
                 "username": username,
                 "token": token,
                 "time": time,
+                "buttonNumber": buttonNumber,
                 "theme": theme
             }
         };
@@ -97,6 +102,20 @@ function showMessage(message, type) {
     }, 1500);
 }
 
+function toggleButtonNumberVisibility() {
+    var timeSelect = document.getElementById('time');
+    var buttonNumberContainer = document.getElementById('buttonNumberContainer');
+    
+    if (timeSelect.value === 'year5') {
+        buttonNumberContainer.style.display = 'flex';
+    } else {
+        buttonNumberContainer.style.display = 'none';
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('save').addEventListener('click', saveSettings);
+    document.getElementById('time').addEventListener('change', toggleButtonNumberVisibility);
+
+    toggleButtonNumberVisibility();
 });

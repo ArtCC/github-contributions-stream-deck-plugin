@@ -171,17 +171,15 @@ function fetchGitHubContributions(settings, context) {
             }
             const contributionCalendar = data.data.user.contributionsCollection.contributionCalendar;
             const totalContributions = contributionCalendar.totalContributions;
-            const filteredContributions = filterContributionsByTime(contributionCalendar.weeks, time);
+
+            let filteredContributions = filterContributionsByTime(contributionCalendar.weeks, time);
 
             debugLog("Contributions fetched successfully", { filteredContributions });
             updateTitle(filteredContributions.toString(), context);
 
-            const svg = generateContributionSVG(contributionCalendar.weeks, time, settings.theme);
+            const buttonNumber = settings.buttonNumber ? parseInt(settings.buttonNumber) : 0;
+            const svg = generateContributionSVG(contributionCalendar.weeks, time, settings.theme, buttonNumber);
             const pngDataUrl = await svgToPng(svg);
-            return { pngDataUrl, totalContributions };
-        })
-        .then(({ pngDataUrl, totalContributions }) => {
-            debugLog("Contributions fetched successfully", { totalContributions });
             updateImage(pngDataUrl, context);
         })
         .catch(error => {
@@ -209,6 +207,7 @@ function filterContributionsByTime(weeks, time) {
             startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
             break;
         case 'year':
+        case 'year5':
         default:
             startDate = new Date(now.getFullYear(), 0, 1);
     }
@@ -263,7 +262,7 @@ function updateImage(newImage, context) {
     }
 }
 
-function generateContributionSVG(weeks, timeOption, theme) {
+function generateContributionSVG(weeks, timeOption, theme, buttonNumber) {
     const svgWidth = 144;
     const svgHeight = 144;
     const backgroundColor = theme === 'dark' ? '#1e1e1e' : '#ffffff';
@@ -275,83 +274,109 @@ function generateContributionSVG(weeks, timeOption, theme) {
 
     const now = new Date();
 
-    switch (timeOption) {
-        case 'year':
-            cellSize = 2;
-            cellSpacing = 1;
-            gridWidth = 52;
-            gridHeight = 7;
-            break;
-        case 'month':
-            cellSize = 16;
-            cellSpacing = 2;
-            gridWidth = 7;
-            gridHeight = 6;
-            break;
-        case 'week':
-            cellSize = 16;
-            cellSpacing = 4;
-            gridWidth = 7;
-            gridHeight = 1;
-            break;
-        case 'day':
-            cellSize = 144;
-            cellSpacing = 0;
-            gridWidth = 1;
-            gridHeight = 1;
-            break;
-        default:
-            return svg + '</svg>';
-    }
+    if (timeOption === 'year5') {
+        const totalWeeks = 52;
+        const weeksPerButton = Math.ceil(totalWeeks / 5);
+        const startWeek = buttonNumber * weeksPerButton;
+        const endWeek = Math.min(startWeek + weeksPerButton, totalWeeks);
 
-    startX = (svgWidth - (gridWidth * (cellSize + cellSpacing) - cellSpacing)) / 2;
-    startY = (svgHeight - (gridHeight * (cellSize + cellSpacing) - cellSpacing)) / 2;
+        gridWidth = weeksPerButton;
+        gridHeight = 7;
+        cellSize = Math.floor(Math.min(svgWidth / gridWidth, svgHeight / gridHeight)) - 1;
+        cellSpacing = 1;
 
-    let relevantDays;
-    if (timeOption === 'year') {
-        relevantDays = weeks.flatMap(week => week.contributionDays);
-    } else if (timeOption === 'month') {
-        const currentMonth = now.getMonth();
-        const currentYear = now.getFullYear();
-        relevantDays = weeks.flatMap(week => week.contributionDays)
-            .filter(day => {
-                const date = new Date(day.date);
-                return date.getMonth() === currentMonth && date.getFullYear() === currentYear;
-            });
-    } else if (timeOption === 'week') {
-        relevantDays = weeks[weeks.length - 1].contributionDays;
+        startX = (svgWidth - (gridWidth * (cellSize + cellSpacing) - cellSpacing)) / 2;
+        startY = (svgHeight - (gridHeight * (cellSize + cellSpacing) - cellSpacing)) / 2;
+
+        for (let w = startWeek; w < endWeek; w++) {
+            const week = weeks[w];
+            if (week) {
+                week.contributionDays.forEach((day, d) => {
+                    const x = startX + (w - startWeek) * (cellSize + cellSpacing);
+                    const y = startY + d * (cellSize + cellSpacing);
+                    svg += `<rect x="${x}" y="${y}" width="${cellSize}" height="${cellSize}" fill="${day.color}" rx="2" ry="2"/>`;
+                });
+            }
+        }
     } else {
-        relevantDays = [weeks[weeks.length - 1].contributionDays[weeks[weeks.length - 1].contributionDays.length - 1]];
-    }
+        switch (timeOption) {
+            case 'year':
+                cellSize = 2;
+                cellSpacing = 1;
+                gridWidth = 52;
+                gridHeight = 7;
+                break;
+            case 'month':
+                cellSize = 16;
+                cellSpacing = 2;
+                gridWidth = 7;
+                gridHeight = 6;
+                break;
+            case 'week':
+                cellSize = 16;
+                cellSpacing = 4;
+                gridWidth = 7;
+                gridHeight = 1;
+                break;
+            case 'day':
+                cellSize = 144;
+                cellSpacing = 0;
+                gridWidth = 1;
+                gridHeight = 1;
+                break;
+            default:
+                return svg + '</svg>';
+        }
 
-    relevantDays.forEach((day, index) => {
-        const date = new Date(day.date);
-        let x, y;
+        startX = (svgWidth - (gridWidth * (cellSize + cellSpacing) - cellSpacing)) / 2;
+        startY = (svgHeight - (gridHeight * (cellSize + cellSpacing) - cellSpacing)) / 2;
 
+        let relevantDays;
         if (timeOption === 'year') {
-            const weekIndex = Math.floor(index / 7);
-            const dayIndex = index % 7;
-            x = startX + weekIndex * (cellSize + cellSpacing);
-            y = startY + dayIndex * (cellSize + cellSpacing);
+            relevantDays = weeks.flatMap(week => week.contributionDays);
         } else if (timeOption === 'month') {
-            const firstDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
-            const startDayOfWeek = firstDayOfMonth.getDay();
-            const dayOfMonth = date.getDate() - 1;
-            x = startX + ((startDayOfWeek + dayOfMonth) % 7) * (cellSize + cellSpacing);
-            y = startY + Math.floor((startDayOfWeek + dayOfMonth) / 7) * (cellSize + cellSpacing);
+            const currentMonth = now.getMonth();
+            const currentYear = now.getFullYear();
+            relevantDays = weeks.flatMap(week => week.contributionDays)
+                .filter(day => {
+                    const date = new Date(day.date);
+                    return date.getMonth() === currentMonth && date.getFullYear() === currentYear;
+                });
+        } else if (timeOption === 'week') {
+            relevantDays = weeks[weeks.length - 1].contributionDays;
         } else {
-            x = startX + index * (cellSize + cellSpacing);
-            y = startY;
+            relevantDays = [weeks[weeks.length - 1].contributionDays[weeks[weeks.length - 1].contributionDays.length - 1]];
         }
 
-        svg += `<rect x="${x}" y="${y}" width="${cellSize}" height="${cellSize}" fill="${day.color}" rx="2" ry="2"/>`;
+        relevantDays.forEach((day, index) => {
+            const date = new Date(day.date);
+            let x, y;
 
-        if (timeOption === 'week') {
-            const dayLabel = ['D', 'L', 'M', 'X', 'J', 'V', 'S'][date.getDay()];
-            svg += `<text x="${x + cellSize / 2}" y="${y - 6}" font-family="Arial" font-size="10" fill="${textColor}" text-anchor="middle">${dayLabel}</text>`;
-            svg += `<text x="${x + cellSize / 2}" y="${y + cellSize + 14}" font-family="Arial" font-size="10" fill="${textColor}" text-anchor="middle">${day.contributionCount}</text>`;
-        }
-    });
+            if (timeOption === 'year') {
+                const weekIndex = Math.floor(index / 7);
+                const dayIndex = index % 7;
+                x = startX + weekIndex * (cellSize + cellSpacing);
+                y = startY + dayIndex * (cellSize + cellSpacing);
+            } else if (timeOption === 'month') {
+                const firstDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
+                const startDayOfWeek = firstDayOfMonth.getDay();
+                const dayOfMonth = date.getDate() - 1;
+                x = startX + ((startDayOfWeek + dayOfMonth) % 7) * (cellSize + cellSpacing);
+                y = startY + Math.floor((startDayOfWeek + dayOfMonth) / 7) * (cellSize + cellSpacing);
+            } else {
+                x = startX + index * (cellSize + cellSpacing);
+                y = startY;
+            }
+
+            svg += `<rect x="${x}" y="${y}" width="${cellSize}" height="${cellSize}" fill="${day.color}" rx="2" ry="2"/>`;
+
+            if (timeOption === 'week') {
+                const dayLabel = ['D', 'L', 'M', 'X', 'J', 'V', 'S'][date.getDay()];
+                svg += `<text x="${x + cellSize / 2}" y="${y - 6}" font-family="Arial" font-size="10" fill="${textColor}" text-anchor="middle">${dayLabel}</text>`;
+                svg += `<text x="${x + cellSize / 2}" y="${y + cellSize + 14}" font-family="Arial" font-size="10" fill="${textColor}" text-anchor="middle">${day.contributionCount}</text>`;
+            }
+        });
+    }
 
     svg += '</svg>';
     return svg;
