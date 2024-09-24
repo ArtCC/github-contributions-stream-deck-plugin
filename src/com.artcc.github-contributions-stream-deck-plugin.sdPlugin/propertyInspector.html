@@ -1,0 +1,44 @@
+<head>
+    <meta charset="utf-8" />
+    <title>GitHub Contributions</title>
+    <link rel="stylesheet" href="css/sdpi.css">
+    <link rel="stylesheet" href="css/propertyInspector.css">
+    <script src="js/propertyInspector.js"></script>
+</head>
+
+<body>
+    <div class="sdpi-wrapper">
+        <div class="sdpi-item">
+            <div class="sdpi-item-label">Username</div>
+            <input class="sdpi-item-value" id="username" placeholder="Enter your username" required>
+        </div>
+        <div class="sdpi-item">
+            <div class="sdpi-item-label">
+                <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens"
+                    target="_blank">Token</a>
+            </div>
+            <input id="token" class="sdpi-item-value" type="password" placeholder="Enter your GitHub personal token"
+                required />
+        </div>
+        <div class="sdpi-item">
+            <div class="sdpi-item-label">Time</div>
+            <select class="sdpi-item-value select" id="time">
+                <option value="year">Year</option>
+                <option value="month">Month</option>
+                <option value="week">Week</option>
+                <option value="day">Day</option>
+            </select>
+        </div>
+        <div class="sdpi-item">
+            <div class="sdpi-item-label">Theme</div>
+            <select class="sdpi-item-value select" id="theme">
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+            </select>
+            <button class="sdpi-item-value" id="save">Save settings</button>
+        </div>
+        <div class="sdpi-item"></div>
+        <div id="message" class="sdpi-item-value"></div>
+    </div>
+    </div>
+</body>

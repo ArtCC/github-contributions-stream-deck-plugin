@@ -1,0 +1,45 @@
+{
+	"Name": "GitHub Contributions",
+	"Description": "Show me my contribution details on GitHub",
+	"Author": "Arturo Carretero Calvo",
+	"URL": "https://github.com/artcc/github-contributions-stream-deck-plugin",
+	"Icon": "images/github_icon",
+	"CodePath": "app.html",
+	"PropertyInspectorPath": "propertyInspector.html",
+	"html_remote_debugging_enabled": true,
+	"Actions": [
+		{
+			"Tooltip": "Show me my contribution details on GitHub.",
+			"UUID": "com.artcc.github-contributions-stream-deck-plugin",
+			"Icon": "images/github_icon",
+			"Name": "Contributions",
+			"SupportedInMultiActions": true,
+			"States": [
+				{
+					"Image": "images/github_icon",
+					"Title": "",
+					"TitleAlignment": "bottom",
+					"FontSize": "10",
+					"TitleColor": "white"
+				}
+			]
+		}
+	],
+	"Category": "GitHub",
+	"CategoryIcon": "images/github_category_icon",
+	"Version": "1.0.0",
+	"SDKVersion": 2,
+	"OS": [
+		{
+			"Platform": "mac",
+			"MinimumVersion": "10.11"
+		},
+		{
+			"Platform": "windows",
+			"MinimumVersion": "10"
+		}
+	],
+	"Software": {
+		"MinimumVersion": "5.0"
+	}
+}
