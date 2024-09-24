@@ -317,6 +317,7 @@ function generateContributionSVG(weeks, timeOption, theme, buttonNumber) {
     const svgHeight = 144;
     const backgroundColor = theme === 'dark' ? '#1e1e1e' : '#ffffff';
     const textColor = theme === 'dark' ? '#ffffff' : '#333333';
+    const dividerColor = theme === 'dark' ? '#ffffff' : '#000000';
 
     let cellSize, cellSpacing, gridWidth, gridHeight, startX, startY;
     let svg = `<svg width="${svgWidth}" height="${svgHeight}" xmlns="http://www.w3.org/2000/svg">`;
@@ -324,7 +325,43 @@ function generateContributionSVG(weeks, timeOption, theme, buttonNumber) {
 
     const now = new Date();
 
-    if (timeOption === 'year5') {
+    if (timeOption === 'year') {
+        const halfYear = 26;
+
+        cellSize = 4;
+        cellSpacing = 1;
+        gridWidth = 26;
+        gridHeight = 7;
+
+        startX = (svgWidth - (gridWidth * (cellSize + cellSpacing))) / 2;
+        startY = (svgHeight / 2 - (gridHeight * (cellSize + cellSpacing))) / 2;
+
+        for (let w = 0; w < halfYear; w++) {
+            const week = weeks[w];
+            if (week) {
+                week.contributionDays.forEach((day, d) => {
+                    const x = startX + w * (cellSize + cellSpacing);
+                    const y = startY + d * (cellSize + cellSpacing);
+                    svg += `<rect x="${x}" y="${y}" width="${cellSize}" height="${cellSize}" fill="${day.color}" rx="1" ry="1"/>`;
+                });
+            }
+        }
+
+        svg += `<line x1="0" y1="${svgHeight / 2}" x2="${svgWidth}" y2="${svgHeight / 2}" stroke="${dividerColor}" stroke-width="1"/>`;
+
+        startY = svgHeight / 2 + (svgHeight / 2 - (gridHeight * (cellSize + cellSpacing))) / 2;
+
+        for (let w = halfYear; w < weeks.length; w++) {
+            const week = weeks[w];
+            if (week) {
+                week.contributionDays.forEach((day, d) => {
+                    const x = startX + (w - halfYear) * (cellSize + cellSpacing);
+                    const y = startY + d * (cellSize + cellSpacing);
+                    svg += `<rect x="${x}" y="${y}" width="${cellSize}" height="${cellSize}" fill="${day.color}" rx="1" ry="1"/>`;
+                });
+            }
+        }
+    } else if (timeOption === 'year5') {
         const totalWeeks = 52;
         const weeksPerButton = Math.ceil(totalWeeks / 5);
         const startWeek = buttonNumber * weeksPerButton;
@@ -350,12 +387,6 @@ function generateContributionSVG(weeks, timeOption, theme, buttonNumber) {
         }
     } else {
         switch (timeOption) {
-            case 'year':
-                cellSize = 2;
-                cellSpacing = 1;
-                gridWidth = 52;
-                gridHeight = 7;
-                break;
             case 'month':
                 cellSize = 16;
                 cellSpacing = 2;
@@ -382,9 +413,7 @@ function generateContributionSVG(weeks, timeOption, theme, buttonNumber) {
         startY = (svgHeight - (gridHeight * (cellSize + cellSpacing) - cellSpacing)) / 2;
 
         let relevantDays;
-        if (timeOption === 'year') {
-            relevantDays = weeks.flatMap(week => week.contributionDays);
-        } else if (timeOption === 'month') {
+        if (timeOption === 'month') {
             const currentMonth = now.getMonth();
             const currentYear = now.getFullYear();
             relevantDays = weeks.flatMap(week => week.contributionDays)
@@ -402,12 +431,7 @@ function generateContributionSVG(weeks, timeOption, theme, buttonNumber) {
             const date = new Date(day.date);
             let x, y;
 
-            if (timeOption === 'year') {
-                const weekIndex = Math.floor(index / 7);
-                const dayIndex = index % 7;
-                x = startX + weekIndex * (cellSize + cellSpacing);
-                y = startY + dayIndex * (cellSize + cellSpacing);
-            } else if (timeOption === 'month') {
+            if (timeOption === 'month') {
                 const firstDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
                 const startDayOfWeek = firstDayOfMonth.getDay();
                 const dayOfMonth = date.getDate() - 1;
