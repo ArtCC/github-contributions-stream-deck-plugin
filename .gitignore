@@ -2,6 +2,7 @@
 .idea/**
 /src/DistributionTool
 com.elgato.template.streamDeckPlugin
+/src/*.streamDeckPlugin
 .vscode/**
 package.json
 package-lock.json
