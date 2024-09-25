@@ -41,8 +41,6 @@ As this plugin is not yet available on the Elgato Stream Deck Market, you can in
 
 After installation, the GitHub Contributions plugin should appear in your Stream Deck application.
 
-Note: In the future, when the plugin becomes available on the Elgato Stream Deck Market, you will be able to install it directly from there. Purchasing the plugin from the official market will help support the development of more independent software. Thank you for your support!
-
 ## Configuration
 
 1. Drag the GitHub Contributions action onto your Stream Deck.
