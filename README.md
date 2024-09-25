@@ -35,7 +35,7 @@ As this plugin is not yet available on the Elgato Stream Deck Marketplace, you c
 2. Unzip the downloaded file if necessary.
 3. Open Finder and go to the following directory:
    ```
-   ~/Library/Application Support/com.elgato.StreamDeck/Plugins/
+   ~/Library/Application\ Support/com.elgato.StreamDeck/Plugins/
    ```
 4. Copy the entire folder named `com.artcc.github-contributions-stream-deck-plugin.sdPlugin` from the unzipped download into this Plugins directory.
 5. Restart the Stream Deck application.
@@ -58,7 +58,7 @@ After installation, the GitHub Contributions plugin should appear in your Stream
 1. Drag the GitHub Contributions action onto your Stream Deck.
 2. Click on the action to open the Property Inspector.
 3. Enter your GitHub username.
-4. [Create a personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) on GitHub with the proper permissions (read) and enter it in the token field.
+4. [Create a personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) on GitHub with the proper permissions (read:user) and enter it in the token field.
 5. Choose your preferred time frame (day, week, month, year, or year with 5 buttons horizontally).
 6. If using the 5-button year view, configure each button with its corresponding number (1-5).
 7. Select your preferred theme (light or dark).
