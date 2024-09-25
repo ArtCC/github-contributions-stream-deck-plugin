@@ -15,6 +15,18 @@ This Stream Deck plugin allows you to visualize your GitHub contribution graph d
 
 ## Installation
 
+### Option 1: Purchase the compiled plugin
+
+For a hassle-free installation and to support the development of this plugin, you can purchase the compiled version for just €3.
+
+<a href="https://ko-fi.com/s/117a6b9e39" target="_blank">
+  <img src="https://storage.ko-fi.com/cdn/brandasset/kofi_button_blue.png" alt="Buy Me a Coffee at ko-fi.com" style="height: 40px !important;width: 145px !important;" >
+</a>
+
+Once purchased, follow the installation instructions provided with the download.
+
+### Option 2: Install from source
+
 As this plugin is not yet available on the Elgato Stream Deck Marketplace, you can install it locally by following these steps:
 
 ### For macOS:
@@ -82,7 +94,11 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## Support the Project
 
-If you find this plugin useful and would like to support its development, consider making a donation. Your support helps me continue to improve and maintain this project.
+If you find this plugin useful and would like to support its development, consider making a donation or purchasing the compiled version. Your support helps me continue to improve and maintain this project.
+
+<a href="https://ko-fi.com/s/117a6b9e39" target="_blank">
+  <img src="https://storage.ko-fi.com/cdn/brandasset/kofi_button_blue.png" alt="Buy Me a Coffee at ko-fi.com" style="height: 40px !important;width: 145px !important;" >
+</a>
 
 <a href="https://donate.stripe.com/fZe9DK9Fz2cK1PO8ww" target="_blank">Donate via Stripe</a>
 
