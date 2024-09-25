@@ -84,7 +84,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 If you find this plugin useful and would like to support its development, consider making a donation. Your support helps me continue to improve and maintain this project.
 
-[Donate via Stripe](https://donate.stripe.com/fZe9DK9Fz2cK1PO8ww)
+<a href="https://donate.stripe.com/fZe9DK9Fz2cK1PO8ww" target="_blank">Donate via Stripe</a>
 
 Thank you for your support!
 
