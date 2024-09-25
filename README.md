@@ -15,7 +15,7 @@ This Stream Deck plugin allows you to visualize your GitHub contribution graph d
 
 ## Installation
 
-As this plugin is not yet available on the Elgato Stream Deck Market, you can install it locally by following these steps:
+As this plugin is not yet available on the Elgato Stream Deck Marketplace, you can install it locally by following these steps:
 
 ### For macOS:
 
