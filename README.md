@@ -15,10 +15,33 @@ This Stream Deck plugin allows you to visualize your GitHub contribution graph d
 
 ## Installation
 
-1. Download the latest release from the [releases page](https://marketplace.elgato.com/stream-deck).
-2. Double-click the downloaded file to install it on your Stream Deck.
+As this plugin is not yet available on the Elgato Stream Deck Market, you can install it locally by following these steps:
 
-You can install the plugin locally by downloading the code but if you want to help me in developing more software independently you can purchase the plugin officially from the Elgato Stream Deck market. Thank you very much!
+### For macOS:
+
+1. Download the source code from this GitHub repository.
+2. Unzip the downloaded file if necessary.
+3. Open Finder and go to the following directory:
+   ```
+   ~/Library/Application Support/com.elgato.StreamDeck/Plugins/
+   ```
+4. Copy the entire folder named `com.artcc.github-contributions-stream-deck-plugin.sdPlugin` from the unzipped download into this Plugins directory.
+5. Restart the Stream Deck application.
+
+### For Windows:
+
+1. Download the source code from this GitHub repository.
+2. Unzip the downloaded file if necessary.
+3. Open File Explorer and go to the following directory:
+   ```
+   %appdata%\Elgato\StreamDeck\Plugins\
+   ```
+4. Copy the entire folder named `com.artcc.github-contributions-stream-deck-plugin.sdPlugin` from the unzipped download into this Plugins directory.
+5. Restart the Stream Deck application.
+
+After installation, the GitHub Contributions plugin should appear in your Stream Deck application.
+
+Note: In the future, when the plugin becomes available on the Elgato Stream Deck Market, you will be able to install it directly from there. Purchasing the plugin from the official market will help support the development of more independent software. Thank you for your support!
 
 ## Configuration
 
@@ -45,19 +68,23 @@ To use the extended year view:
 
 Here are some screenshots demonstrating the plugin in action:
 
-![Settings](https://github.com/ArtCC/github-contributions-stream-deck-plugin/blob/main/resources/settings.jpeg)
-
-![Dark theme](https://github.com/ArtCC/github-contributions-stream-deck-plugin/blob/main/resources/dark.jpeg)
-
-![Light theme](https://github.com/ArtCC/github-contributions-stream-deck-plugin/blob/main/resources/light.jpeg)
+[You can add your screenshots here]
 
 ## Privacy and Security
 
-This plugin uses your personal access token to retrieve your public contribution data from GitHub. Your token is stored locally on your machine and is never sent to any server other than GitHub's API.
+Your personal access token is stored locally on your machine and is never sent to any server other than GitHub's API.
 
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
+
+## Support the Project
+
+If you find this plugin useful and would like to support its development, consider making a donation. Your support helps me continue to improve and maintain this project.
+
+[Donate via Stripe](https://donate.stripe.com/fZe9DK9Fz2cK1PO8ww)
+
+Thank you for your support!
 
 ## License
 
@@ -76,4 +103,4 @@ If you encounter any problems or have any questions, please open an issue on thi
 
 Enjoy keeping track of your GitHub contributions right from your Stream Deck!
 
-Arturo Carretero Calvo - 2024
+**Arturo Carretero Calvo - 2024**
