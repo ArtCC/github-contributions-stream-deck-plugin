@@ -17,7 +17,7 @@ This Stream Deck plugin allows you to visualize your GitHub contribution graph d
 
 ### Option 1: Purchase the compiled plugin
 
-For a hassle-free installation and to support the development of this plugin, you can purchase the compiled version for just €3.
+For a hassle-free installation and to support the development of this plugin, you can purchase the compiled version for just €2.
 
 <a href="https://ko-fi.com/s/117a6b9e39" target="_blank">
   <img src="https://github.com/ArtCC/github-contributions-stream-deck-plugin/blob/main/resources/support-me-ko-fi.png" alt="Support me on ko-fi.com" >
