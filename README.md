@@ -104,7 +104,7 @@ Thank you for your support!
 
 ## License
 
-[MIT License](LICENSE)
+[Apache License](LICENSE)
 
 ## Acknowledgements
 
