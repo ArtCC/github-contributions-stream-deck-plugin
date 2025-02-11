@@ -1,5 +1,7 @@
 # GitHub Contributions Stream Deck Plugin
 
+<img src="https://github.com/ArtCC/github-contributions-stream-deck-plugin/blob/main/market-icon.png" height="256">
+
 ## Overview
 
 This Stream Deck plugin allows you to visualize your GitHub contribution graph directly on your Stream Deck. Keep track of your coding activity with a quick glance at your Stream Deck!
