@@ -90,14 +90,6 @@ Your personal access token is stored locally on your machine and is never sent t
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-## Support the Project
-
-If you find this plugin useful and would like to support its development, consider making a donation or purchasing the compiled version. Your support helps me continue to improve and maintain this project.
-
-<a href="https://donate.stripe.com/fZe9DK9Fz2cK1PO8ww" target="_blank">Donate via Stripe</a>
-
-Thank you for your support!
-
 ## License
 
 [Apache License](LICENSE)
